@@ -351,9 +351,12 @@ fi
 uci commit modem
 
 ttl=$(uci -q get modem.modeminfo$CURRMODEM.ttl)
-if [ $ttl -ne 0 ]; then
-	$ROOTER/connect/handlettl.sh $CURRMODEM "$ttl"
+if [ -z $ttl ]; then
+	ttl=0
 fi
+#if [ $ttl -ne 0 ]; then
+	$ROOTER/connect/handlettl.sh $CURRMODEM "$ttl"
+#fi
 
 if [ $SP -eq 2 ]; then
 	get_connect
